@@ -19,23 +19,24 @@ interface GithubService {
 
     @GET("users/{user}/repos")
     suspend fun repos(@Path("user") user: String?): List<UserReposItem>
+}
 
-    companion object {
-        private const val BASE_URL = "https://api.github.com/"
+//make the retrofit client singleton to avoid recreating it on config changes
+object GithubServiceClient {
+    private const val BASE_URL = "https://api.github.com/"
 
-        fun create(): GithubService {
-            val logger = HttpLoggingInterceptor()
-            logger.level = Level.BASIC
+    fun create(baseUrl: String = BASE_URL): GithubService {
+        val logger = HttpLoggingInterceptor()
+        logger.level = Level.BODY
 
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
-            return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(GithubService::class.java)
-        }
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .build()
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GithubService::class.java)
     }
 }
