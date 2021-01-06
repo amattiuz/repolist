@@ -1,5 +1,6 @@
 package com.amanda.githubrepos.api
 
+import com.amanda.githubrepos.BASE_URL
 import com.amanda.githubrepos.data.User
 import com.amanda.githubrepos.data.UserReposItem
 import okhttp3.OkHttpClient
@@ -23,8 +24,6 @@ interface GithubService {
 
 //make the retrofit client singleton to avoid recreating it on config changes
 object GithubServiceClient {
-    private const val BASE_URL = "https://api.github.com/"
-
     fun create(baseUrl: String = BASE_URL): GithubService {
         val logger = HttpLoggingInterceptor()
         logger.level = Level.BODY

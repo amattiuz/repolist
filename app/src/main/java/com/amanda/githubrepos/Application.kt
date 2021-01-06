@@ -19,5 +19,6 @@ interface GithubReposInterface {
     fun provideViewModelFactory() : ViewModelProvider.Factory
 }
 
+//TODO add the configuration for this to the gradle file (dependencies?)
 @OpenForTesting
 annotation class OpenForTesting
