@@ -3,4 +3,6 @@
     <string name="list_title">Repo list for selected user</string>
     <string name="no_description_available"><![CDATA[<<no description available>>]]></string>
     <string name="no_name_available"><![CDATA[<<no name available>>]]></string>
+    <string name="user_name_search_hint">Enter user name</string>
+    <string name="search_btn_label">search</string>
 </resources>

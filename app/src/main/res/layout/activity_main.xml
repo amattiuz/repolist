@@ -20,22 +20,75 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
-        <TextView
-            android:id="@+id/txt"
+        <LinearLayout
+            android:id="@+id/usernameSearchRow"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:text="@string/list_title"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/row_item_margin_horizontal"
+            android:layout_marginVertical="@dimen/general_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingVertical="@dimen/row_item_margin_vertical"
+                android:paddingRight="@dimen/card_margin_left"
+                android:gravity="center_vertical"
+                android:hint="@string/user_name_search_hint"
+                android:imeOptions="actionSearch|actionDone"
+                 />
+
+            <Button
+                android:id="@+id/userSearchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:text="@string/search_btn_label"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/userInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/list"
+            app:layout_constraintEnd_toEndOf="@id/usernameSearchRow"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintStart_toStartOf="@id/list"
+            app:layout_constraintTop_toBottomOf="@id/usernameSearchRow"
+            app:layout_constraintVertical_bias="0.0"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/avatarImg"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/avatar_placeholder"
+                android:padding="@dimen/general_margin"
+               />
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/show_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/txt"
+            app:layout_constraintTop_toBottomOf="@id/userInfoLayout"
             />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -47,9 +100,13 @@
             app:layoutManager="LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt"
+            app:layout_constraintTop_toBottomOf="@id/userInfoLayout"
+            app:layout_constraintVertical_bias="0.0"
             tools:ignore="UnusedAttribute" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

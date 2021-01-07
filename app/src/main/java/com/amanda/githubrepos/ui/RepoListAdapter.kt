@@ -20,4 +20,5 @@ class RepoListAdapter(items: List<UserReposItem>): RecyclerView.Adapter<RepoView
 
     fun updateRepoList(newRepos: List<UserReposItem>) = repos.addAll(newRepos)
 
+    fun clearRepoList() = repos.clear()
 }

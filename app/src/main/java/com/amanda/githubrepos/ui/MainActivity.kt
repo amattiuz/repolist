@@ -10,10 +10,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amanda.githubrepos.Injection
 import com.amanda.githubrepos.R
+import com.amanda.githubrepos.data.User
 import com.amanda.githubrepos.data.UserReposItem
 import com.amanda.githubrepos.databinding.ActivityMainBinding
 import com.amanda.githubrepos.model.RepoListViewModel
 import com.amanda.githubrepos.utils.Status
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.collectLatest
@@ -31,12 +35,14 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainActivity = this
 
+        //setup search button listener
+        binding.userSearchButton.setOnClickListener { showUserInfo() }
+
         //setup view model
         viewModel = ViewModelProvider(
             this,
             Injection.provideViewModelFactory()
         ).get(RepoListViewModel::class.java)
-
 
         //setup recyclerview stuff
         binding.list.layoutManager =  LinearLayoutManager(
@@ -49,7 +55,31 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
         binding.list.adapter = adapter
 
-       showUserRepos()
+        //init UI elements
+        initUI()
+    }
+
+    private fun initUI() {
+        showLoadingMessage(false)
+        binding.avatarImg.visibility = View.INVISIBLE
+        binding.userName.visibility = View.INVISIBLE
+    }
+
+    private fun showUserInfo() {
+        //call api
+        // observe the flow, make changes
+        // do no block main thread
+        launch {
+            viewModel.user(usernameEditText.text.toString())
+                .distinctUntilChanged()
+                .collectLatest {
+                    when (it.status) {
+                        Status.SUCCESS -> updateUserInfo(it.data)
+                        Status.LOADING -> showLoadingMessage(true)
+                        Status.ERROR -> showErrorInfo(it.message ?: "")
+                    }
+                }
+        }
     }
 
     private fun showUserRepos() {
@@ -57,7 +87,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         // observe the flow, send data to adapter
         // do no block main thread
         launch {
-            viewModel.repos("amattiuz")
+            viewModel.repos(usernameEditText.text.toString())
                 .distinctUntilChanged()
                 .collectLatest {
                     when (it.status) {
@@ -67,6 +97,30 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                     }
                 }
         }
+    }
+
+    private fun updateUserInfo(data: User?) {
+        showLoadingMessage(false)
+        if (data != null) {
+            adapter.clearRepoList()
+            adapter.notifyDataSetChanged()
+            setImageSource(data.avatar_url)
+            binding.avatarImg.visibility = View.VISIBLE
+            with(binding.userName) {
+                this.text = data.name
+                this.visibility = View.VISIBLE
+            }
+            showUserRepos()
+        }
+    }
+
+    private fun setImageSource(url: String) {
+        Glide.with(this)
+            .load(url)
+            .centerCrop()
+            .placeholder(R.drawable.avatar_placeholder)
+            .apply(RequestOptions().override(120, 120))
+            .into(binding.avatarImg)
     }
 
     //send data received from server to the adapter
