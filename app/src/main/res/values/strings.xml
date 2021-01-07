@@ -9,4 +9,6 @@
     <string name="repo_stars_title">Stars</string>
     <string name="repo_last_updated_title">Last Updated</string>
     <string name="repo_name_title">Name</string>
+    <string name="user_avatar_content_description">User Avatar</string>
+    <string name="user_name_placeholder">User</string>
 </resources>

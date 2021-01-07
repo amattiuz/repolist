@@ -41,7 +41,7 @@
                 android:gravity="center_vertical"
                 android:hint="@string/user_name_search_hint"
                 android:imeOptions="actionSearch|actionDone"
-                 />
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/userSearchButton"
@@ -73,13 +73,13 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/avatar_placeholder"
                 android:padding="@dimen/general_margin"
-               />
+                android:contentDescription="@string/user_avatar_content_description" />
 
             <TextView
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/user_name_placeholder"
                 />
         </LinearLayout>
 

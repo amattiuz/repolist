@@ -12,7 +12,7 @@ import com.amanda.githubrepos.model.RepoListViewModelFactory
  */
 object Injection {
 
-    fun provideApiRepository(): GithubDataRepository {
+    private fun provideApiRepository(): GithubDataRepository {
         return GithubDataRepository(GithubServiceClient.create(BASE_URL))
     }
 

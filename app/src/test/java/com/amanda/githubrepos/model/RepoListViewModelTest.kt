@@ -14,7 +14,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 import kotlin.time.ExperimentalTime
 
@@ -163,7 +162,7 @@ class RepoListViewModelTest {
         }
     }
 
-    private fun repoList() = listOf<UserReposItem>(
+    private fun repoList() = listOf(
         UserReposItem("my first repo", 0, "first", 0, "JAN-04-2021"),
         UserReposItem("my second repo", 10, "second", 5, "JAN-05-2021"),
     )

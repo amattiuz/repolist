@@ -3,7 +3,6 @@ package com.amanda.githubrepos.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -29,7 +28,7 @@ class MainActivity : FragmentActivity(), CoroutineScope by MainScope() {
 
     private lateinit var viewModel: RepoListViewModel
     private val adapter = RepoListAdapter(emptyList())
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
