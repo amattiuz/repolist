@@ -17,7 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.amanda.githubrepos.MockTestRunner"
     }
 
     buildTypes {
@@ -71,12 +71,12 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     testImplementation 'io.kotest:kotest-assertions-core:4.4.0.RC1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'org.jetbrains.kotlin:kotlin-allopen:1.4.21'
-    testImplementation 'org.mockito:mockito-core:2.23.0'
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    implementation "org.jetbrains.kotlin:kotlin-allopen:$allOpenVersion"
+    testImplementation "org.mockito:mockito-core:$mockito"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlin"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
-    testImplementation 'app.cash.turbine:turbine:0.3.0'
+    testImplementation "app.cash.turbine:turbine:$turbineVersion"
 
     //loading images from server
     implementation "com.github.bumptech.glide:glide:$glideVersion"
