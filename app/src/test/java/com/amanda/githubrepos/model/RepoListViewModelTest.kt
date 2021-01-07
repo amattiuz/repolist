@@ -12,11 +12,13 @@ import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnitRunner
 import kotlin.time.ExperimentalTime
 
-
+@RunWith(MockitoJUnitRunner::class)
 class RepoListViewModelTest {
 
     @Mock
@@ -30,7 +32,6 @@ class RepoListViewModelTest {
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
         viewModel = RepoListViewModel(repository)
     }
 
