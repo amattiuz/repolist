@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +25,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+class MainActivity : FragmentActivity(), CoroutineScope by MainScope() {
 
     private lateinit var viewModel: RepoListViewModel
     private val adapter = RepoListAdapter(emptyList())
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //setup databinding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainActivity = this
 
@@ -44,15 +47,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             Injection.provideViewModelFactory()
         ).get(RepoListViewModel::class.java)
 
-        //setup recyclerview stuff
+        //setup recyclerview stuff (via binding)
         binding.list.layoutManager =  LinearLayoutManager(
             this,
             LinearLayoutManager.VERTICAL,
             false
         )
-
         binding.list.itemAnimator = DefaultItemAnimator()
-
         binding.list.adapter = adapter
 
         //init UI elements

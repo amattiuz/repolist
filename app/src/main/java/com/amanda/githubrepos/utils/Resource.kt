@@ -1,5 +1,6 @@
 package com.amanda.githubrepos.utils
 
+//Utilities to deal with api call results
 enum class Status {
     SUCCESS,
     ERROR,

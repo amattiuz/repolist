@@ -5,4 +5,8 @@
     <string name="no_name_available"><![CDATA[<<no name available>>]]></string>
     <string name="user_name_search_hint">Enter user name</string>
     <string name="search_btn_label">search</string>
+    <string name="repo_forks_title">Forks</string>
+    <string name="repo_stars_title">Stars</string>
+    <string name="repo_last_updated_title">Last Updated</string>
+    <string name="repo_name_title">Name</string>
 </resources>
