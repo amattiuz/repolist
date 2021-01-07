@@ -1,8 +1,5 @@
 package com.amanda.githubrepos.model
 
-import android.util.Log
-import android.view.KeyEvent
-import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.amanda.githubrepos.data.User
